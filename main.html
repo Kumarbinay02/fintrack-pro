@@ -1,0 +1,1769 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fintrack UI</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 100%;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        overflow-y: auto;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Oxygen,
+          Ubuntu,
+          Cantarell,
+          "Open Sans",
+          "Helvetica Neue",
+          sans-serif;
+      }
+      section {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: row;
+      }
+      .left {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        width: 20%;
+        height: 100vh;
+
+        padding: 25px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        background-color: #f8f9fb;
+
+        border: 1px solid #e5e7eb;
+
+        z-index: 1000;
+      }
+      .right {
+        width: 80%;
+        margin-left: 20%;
+
+        min-height: 100vh;
+
+        display: flex;
+        flex-direction: column;
+      }
+      .logo {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+      }
+      .layer {
+        height: 100%;
+        width: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .layer i {
+        font-size: 30px;
+      }
+
+      .left-top {
+        width: 100%;
+        height: 28%;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+      .left-bottom {
+        width: 100%;
+        height: 6%;
+        display: flex;
+        border: none;
+        border-radius: 10px;
+      }
+      .dashboard-settings {
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .dashboard {
+        display: flex;
+        flex-direction: row;
+        background-color: #dbeafe;
+        border: none;
+        border-radius: 10px;
+        padding: 15px;
+
+        cursor: pointer;
+        gap: 5px;
+        text-align: center;
+      }
+      .settings {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        cursor: pointer;
+        border: none;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        color: black;
+      }
+      .settings a {
+        color: black;
+        text-decoration: none;
+        font-size: 16px;
+        opacity: 0.7;
+      }
+      .dashboard a {
+        text-decoration: none;
+        font-size: 16px;
+        color: blue;
+      }
+
+      .left-bottom #Add-transaction {
+        height: 100%;
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        font-size: 13px;
+        background-color: black;
+        color: white;
+
+        cursor: pointer;
+      }
+      .right-top {
+        width: 100%;
+        min-height: 70px;
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        border: 1px solid #e5e7eb;
+
+        background: #fff;
+
+        position: sticky;
+        top: 0;
+        z-index: 999;
+      }
+      .username-logout {
+        height: 100%;
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        gap: 25px;
+        padding: 20px;
+      }
+      .right-bottom {
+        width: 100%;
+        padding: 30px;
+      }
+      .border-user {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+      }
+
+      .log-out {
+        width: 100%;
+        border: none;
+        border-radius: 5px;
+        background-color: rgb(197, 133, 133);
+        display: flex;
+        flex-direction: row;
+      }
+      #logout {
+        height: 100%;
+        width: 100%;
+        border: 0.3px solid grey;
+        border-radius: 5px;
+        padding: 15px 20px;
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .border-1 {
+        opacity: 0.5;
+      }
+      .add-transaction {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100vh;
+
+        display: none;
+        justify-content: center;
+        align-items: center;
+
+        background: rgba(0, 0, 0, 0.45);
+
+        z-index: 9999;
+      }
+      .add-transaction form {
+        height: 57%;
+        width: 25%;
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 20px 20px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      }
+      .form3 {
+        height: auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .title-close-section {
+        font-size: 18px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      #close-btn1 {
+        font-size: 24px;
+        opacity: 0.5;
+        cursor: pointer;
+        border: none;
+      }
+      .type-description-amount-date {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .type-description-amount-date label {
+        font-size: 18px;
+      }
+      .type-label {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .description-label {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .amount-date {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      #amount-label {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      #date-label {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .category-label {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        font-size: 18px;
+      }
+      #type {
+        padding: 10px 20px;
+        border: 0.5px solid #eababa;
+        border-radius: 5px;
+      }
+      #description {
+        padding: 10px 20px;
+        border: 0.5px solid #eababa;
+        border-radius: 5px;
+      }
+      #amount {
+        padding: 10px 20px;
+        border: 0.5px solid #eababa;
+        border-radius: 5px;
+      }
+      #date {
+        padding: 10px 20px;
+        border: 0.5px solid #eababa;
+        border-radius: 5px;
+      }
+      #category {
+        padding: 10px 20px;
+        border: c;
+        border-radius: 5px;
+      }
+      #save-changes {
+        padding: 10px 20px;
+        border: none;
+        border: 0.5px solid #eababa;
+        background-color: black;
+        color: white;
+        font-size: 13px;
+        border-radius: 5px;
+      }
+      .setting-profile {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .setting-heading h1 {
+        font-size: 28px;
+        font-weight: 700;
+        color: black;
+      }
+      .setting-heading p {
+        font-size: 14px;
+        color: #6b7280;
+      }
+      #profile-details-edit {
+        height: auto;
+      }
+      .profile-details {
+        height: auto;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        padding: 15px;
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+      }
+      .profile-edit1 {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .profile-edit {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 6%;
+      }
+      .full-name {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 47%;
+      }
+      .currency {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 47%;
+      }
+      #currency {
+        width: 100%;
+        padding: 10px 10px;
+        border: 0.5px solid #eababa;
+        border-radius: 5px;
+      }
+      #username {
+        width: 100%;
+        padding: 10px 10px;
+        border: 0.5px solid #eababa;
+        border-radius: 5px;
+      }
+
+      #save-changes1 {
+        padding: 10px 20px;
+        border: none;
+        border: 0.5px solid #eababa;
+        background-color: black;
+        color: white;
+        font-size: 13px;
+        border-radius: 5px;
+      }
+      .financial-right {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .financial-heading {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .financial-heading h1 {
+        font-size: 28px;
+      }
+      .financial-heading p {
+        font-size: 14px;
+        color: #6b7280;
+      }
+      .balance-income-expense-transaction-cards {
+        width: 100%;
+        display: flex;
+        gap: 15px;
+      }
+      .card {
+        height: 100%;
+        width: 30%;
+        border: 0.2px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .card-div1 {
+        background-color: #dbeafe;
+        padding: 10px;
+        width: 15%;
+        border: none;
+        border-radius: 5px;
+        color: blue;
+      }
+      .card-div2 {
+        background-color: #dcfce7;
+        padding: 10px;
+        width: 15%;
+        border: none;
+        border-radius: 5px;
+        color: #166534;
+      }
+      .card-div3 {
+        background-color: #fee2e2;
+        padding: 10px;
+        width: 15%;
+        border: none;
+        border-radius: 5px;
+        color: #a61b1b;
+      }
+      .card-div4 {
+        background-color: #dbeafe;
+        padding: 10px;
+        width: 15%;
+        border: none;
+        border-radius: 5px;
+        color: blue;
+      }
+      .balance-text p {
+        font-size: 16px;
+        color: #6b7280;
+      }
+      .income-text p {
+        font-size: 16px;
+        color: #6b7280;
+      }
+      .expense-text p {
+        font-size: 16px;
+        color: #6b7280;
+      }
+      .transaction-text p {
+        font-size: 16px;
+        color: #6b7280;
+      }
+
+      .card span {
+        font-size: 2rem;
+        font-weight: 700;
+      }
+
+      #balance {
+        color: #111827;
+      }
+
+      #income {
+        color: #15803d;
+      }
+
+      #expense {
+        color: #b91c1c;
+      }
+
+      #transactions {
+        color: #111827;
+      }
+      .chart-preference {
+        width: 100%;
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+      }
+      .chart {
+        flex: 2;
+        padding: 20px;
+        border: 0.2px solid #e5e7eb;
+        border-radius: 10px;
+        background: #fff;
+      }
+      .preference {
+        flex: 1;
+        padding: 20px;
+        border: 0.2px solid #e5e7eb;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background: #fff;
+      }
+      .darkmode-preferenceline-resetalldata {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      .dark-mode-btn {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .dark-mode-text {
+        font-size: 15px;
+        font-weight: 700;
+      }
+      .preference-line {
+        width: 100%;
+        height: 1px;
+        background-color: #e5e7eb;
+      }
+      .reset-all-data-btn {
+        height: 100%;
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+      }
+      #reset-all-data {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ff7f7f;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: row;
+        font-size: 13px;
+        justify-content: center;
+        gap: 5px;
+        color: red;
+        font-weight: 550;
+      }
+      .chart-container {
+        width: 100%;
+        height: 320px;
+        margin-top: 15px;
+      }
+
+      .chart-container canvas {
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .bottom-section {
+        width: 64%;
+        margin-top: 20px;
+      }
+
+      .transaction-card {
+        width: 100%;
+        padding: 25px;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        background: #fff;
+      }
+      .transaction-heading h1 {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      .search-filter {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .search-box {
+        width: 42%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 12px 15px;
+      }
+
+      .search-box input {
+        width: 100%;
+        border: none;
+        outline: none;
+        font-size: 15px;
+      }
+
+      .filter-box {
+        flex: 1;
+        background-color: transparent;
+      }
+
+      .filter-box select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        outline: none;
+        background-color: transparent;
+      }
+
+      .transaction-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .transaction-table th {
+        text-align: left;
+        padding: 18px 10px;
+        border-bottom: 1px solid #e5e7eb;
+        color: #6b7280;
+        font-size: 15px;
+      }
+      .transaction-table td {
+        padding: 18px 10px;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .transaction-table td button {
+        padding: 6px 10px;
+        margin-right: 8px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .transaction-table td button:first-child {
+        background: #2563eb;
+        color: white;
+      }
+
+      .transaction-table td button:last-child {
+        background: #dc2626;
+        color: white;
+      }
+      .dark-mode-btn1 {
+        cursor: pointer;
+      }
+      #darkmodebtn {
+        padding: 4px;
+        background-color: black;
+        color: white;
+        cursor: pointer;
+        border: none;
+        border-radius: 3px;
+      }
+      .preference {
+        width: 35%;
+        padding: 25px;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        background: #fff;
+
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+      }
+
+      .preference-heading h1 {
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .preference-content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .dark-mode-btn {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .dark-mode-btn span {
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .preference hr {
+        border: none;
+        border-top: 1px solid #e5e7eb;
+      }
+
+      #reset-all-data {
+        width: 100%;
+        padding: 12px;
+
+        border: 1px solid #fca5a5;
+        border-radius: 8px;
+
+        background: #fff5f5;
+        color: #b91c1c;
+
+        font-size: 15px;
+        font-weight: 600;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+
+        cursor: pointer;
+
+        transition: 0.3s;
+      }
+
+      #reset-all-data:hover {
+        background: #fee2e2;
+      }
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 56px;
+        height: 30px;
+      }
+
+      .switch input {
+        display: none;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        background: #d1d5db;
+        border-radius: 30px;
+        transition: 0.3s;
+      }
+
+      .slider::before {
+        content: "";
+        position: absolute;
+        height: 24px;
+        width: 24px;
+        left: 3px;
+        bottom: 3px;
+
+        background: white;
+        border-radius: 50%;
+        transition: 0.3s;
+      }
+
+      .switch input:checked + .slider {
+        background-color: #2563eb;
+      }
+
+      .switch input:checked + .slider::before {
+        transform: translateX(26px);
+      }
+
+      body.dark {
+        background: #111827;
+        color: white;
+      }
+
+      body.dark .left {
+        background: #1f2937;
+        color: white;
+      }
+
+      body.dark .right-top {
+        background: #1f2937;
+        color: white;
+      }
+
+      body.dark .card,
+      body.dark .chart,
+      body.dark .preference,
+      body.dark .transaction-card {
+        background: #1f2937;
+        color: white;
+
+        border-color: #374151;
+      }
+
+      body.dark .financial-heading p,
+      body.dark .transaction-table th {
+        color: #d1d5db;
+      }
+      body.dark .setting-heading h1 {
+        color: white;
+      }
+      body.daark .profile-details {
+        background-color: #1f2937;
+        border-color: #374151;
+      }
+
+      body.dark form {
+        background-color: #1f2937;
+        color: white;
+        border-color: #374151;
+      }
+      body.dark #close-btn1 {
+        background-color: #1f2937;
+      }
+      body.dark #transactions {
+        color: white;
+      }
+
+      body.dark #balance {
+        color: white;
+      }
+
+      body.dark .chart-container {
+        background-color: #111827;
+      }
+
+      body.dark .search-box {
+        background-color: #111827;
+      }
+      body.dark #searchbox {
+        background-color: transparent;
+      }
+      body.dark .filter-box select {
+        background-color: #111827;
+        color: white;
+      }
+      body.dark .type-label select {
+        background-color: #111827;
+        color: white;
+      }
+      body.dark .description-label #description {
+        background-color: #111827;
+        color: white;
+      }
+      body.dark .category-label select {
+        background-color: #111827;
+        color: white;
+      }
+      body.dark #date,
+      #amount {
+        background-color: #111827;
+        color: white;
+      }
+      body.dark #Add-transaction {
+        background-color: blue;
+        color: white;
+      }
+      body.dark #logout {
+        background-color: #1f2937;
+      }
+      body.dark .card-div4 {
+        background-color: #374151;
+      }
+      body.dark .card-div1 {
+        background-color: #374151;
+      }
+      body.dark .currency select {
+        background-color: #111827;
+        color: white;
+      }
+      body.dark .full-name input {
+        background-color: #111827;
+        color: white;
+      }
+      /* ===========================
+   TABLET (992px)
+=========================== */
+@media (max-width: 992px) {
+
+  .left{
+    width:260px;
+  }
+
+  .right{
+    width:calc(100% - 260px);
+    margin-left:260px;
+  }
+
+  .balance-income-expense-transaction-cards{
+    flex-wrap:wrap;
+  }
+
+  .card{
+    width:48%;
+  }
+
+  .chart-preference{
+    flex-direction:column;
+  }
+
+  .chart,
+  .preference{
+    width:100%;
+  }
+
+  .bottom-section{
+    width:100%;
+  }
+
+  .profile-details{
+    width:100%;
+  }
+
+  .add-transaction form{
+    width:70%;
+    height:auto;
+  }
+
+}
+
+
+/* ===========================
+   MOBILE (768px)
+=========================== */
+@media (max-width:768px){
+
+  section{
+    flex-direction:column;
+  }
+
+  .left{
+    position:relative;
+    width:100%;
+    height:auto;
+    padding:20px;
+  }
+
+  .left-top{
+    gap:20px;
+  }
+
+  .dashboard-settings{
+    flex-direction:row;
+    gap:10px;
+  }
+
+  .dashboard,
+  .settings{
+    flex:1;
+    justify-content:center;
+  }
+
+  .left-bottom{
+    margin-top:20px;
+  }
+
+  .right{
+    width:100%;
+    margin-left:0;
+  }
+
+  .right-top{
+    position:relative;
+    justify-content:center;
+  }
+
+  .username-logout{
+    width:100%;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  .right-bottom{
+    padding:20px;
+  }
+
+  .balance-income-expense-transaction-cards{
+    flex-direction:column;
+  }
+
+  .card{
+    width:100%;
+  }
+
+  .chart-preference{
+    flex-direction:column;
+  }
+
+  .chart,
+  .preference{
+    width:100%;
+  }
+
+  .bottom-section{
+    width:100%;
+  }
+
+  .search-filter{
+    flex-direction:column;
+  }
+
+  .search-box,
+  .filter-box{
+    width:100%;
+  }
+
+  .profile-edit{
+    flex-direction:column;
+    gap:20px;
+  }
+
+  .full-name,
+  .currency{
+    width:100%;
+  }
+
+  .amount-date{
+    flex-direction:column;
+    gap:15px;
+  }
+
+  #amount-label,
+  #date-label{
+    width:100%;
+  }
+
+  #amount,
+  #date{
+    width:100%;
+  }
+
+  .transaction-card{
+    overflow-x:auto;
+  }
+
+  .transaction-table{
+    min-width:700px;
+  }
+
+  .add-transaction{
+    padding:20px;
+  }
+
+  .add-transaction form{
+    width:100%;
+    max-width:500px;
+    height:auto;
+  }
+
+}
+
+
+
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <section>
+      <div class="left">
+        <div class="left-top">
+          <div class="logo">
+            <div class="layer">
+              <i class="fa-solid fa-layer-group"></i>
+            </div>
+            <div class="logo-text">
+              <h2>FinTrack Pro</h2>
+              <p>Enterprise Finance</p>
+            </div>
+          </div>
+          <div class="dashboard-settings">
+            <div class="dashboard active">
+              <a href="#"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+            </div>
+            <div class="settings">
+              <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
+            </div>
+          </div>
+        </div>
+        <div class="left-bottom">
+          <button id="Add-transaction">
+            <i class="fa-solid fa-plus"></i>
+            Add Transaction
+          </button>
+        </div>
+      </div>
+      <div class="right">
+        <div class="right-top">
+          <div class="username-logout">
+            <div class="border-user">
+              <div class="border-1">
+                <p>|</p>
+              </div>
+              <div class="user-name">
+                <h3 id="user-name1"></h3>
+              </div>
+            </div>
+            <div class="log-out">
+              <button id="logout">
+                <i class="fa-solid fa-right-from-bracket"></i> <b>Log Out</b>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="right-bottom">
+          <div class="financial-right">
+            <div class="financial-heading">
+              <h1>Financial Overview</h1>
+              <p>Real-time tracking application</p>
+            </div>
+            <div class="balance-income-expense-transaction-cards">
+              <div class="card">
+                <div class="card-div1">
+                  <div class="balance-img">
+                    <i class="fa-solid fa-building-columns"></i>
+                  </div>
+                </div>
+                <div class="balance-text">
+                  <p>Current Balance</p>
+                  <span id="balance">$0.00</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-div2">
+                  <div class="income-img">
+                    <i class="fa-solid fa-arrow-trend-up"></i>
+                  </div>
+                </div>
+                <div class="income-text">
+                  <p>Total Income</p>
+                  <span id="income">$0.00</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-div3">
+                  <div class="expense-img">
+                    <i class="fa-solid fa-arrow-trend-down"></i>
+                  </div>
+                </div>
+                <div class="expense-text">
+                  <p>Total Expense</p>
+                  <span id="expense">$0.00</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-div4">
+                  <div class="transaction-img">
+                    <i class="fa-solid fa-piggy-bank"></i>
+                  </div>
+                </div>
+                <div class="transaction-text">
+                  <p>Total Transactions</p>
+                  <span id="transactions">0</span>
+                </div>
+              </div>
+            </div>
+            <div class="chart-preference">
+              <div class="chart">
+                <div class="chart-heading">
+                  <h1>Cash Flow Analysis</h1>
+                  <div class="chart-container">
+                    <canvas id="cashFlowChart"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="preference">
+                <div class="preference-heading">
+                  <h1>Preferences</h1>
+                </div>
+
+                <div class="preference-content">
+                  <div class="dark-mode-btn">
+                    <span>Dark Mode</span>
+
+                    <label class="switch">
+                      <input type="checkbox" id="darkmodebtn" />
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+
+                  <hr />
+
+                  <button id="reset-all-data">
+                    <i class="fa-solid fa-trash"></i>
+                    Reset All Data
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="bottom-section">
+              <div class="transaction-card">
+                <div class="transaction-heading">
+                  <h1>All Transactions</h1>
+                </div>
+
+                <div class="search-filter">
+                  <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input
+                      id="searchbox"
+                      type="text"
+                      placeholder="Search transactions..."
+                    />
+                  </div>
+
+                  <div class="filter-box">
+                    <select id="sbox">
+                      <option class="selectbox">All Types</option>
+                      <option class="selectbox">Income Only</option>
+                      <option class="selectbox">Expense Only</option>
+                    </select>
+                  </div>
+                </div>
+
+                <table class="transaction-table">
+                  <thead>
+                    <tr>
+                      <th>DATE</th>
+                      <th>DESCRIPTION</th>
+                      <th>CATEGORY</th>
+                      <th>AMOUNT</th>
+                      <th>ACTIONS</th>
+                    </tr>
+                  </thead>
+
+                  <tbody id="transactionBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="add-transaction">
+      <form id="transactionForm">
+        <div class="form3">
+          <div class="title-close-section">
+            <h3>Add Transaction</h3>
+            <button type="button" id="close-btn1">
+              <i class="fa-solid fa-times"></i>
+            </button>
+          </div>
+          <div class="type-description-amount-date">
+            <div class="type-label">
+              <label for="type">Type</label>
+              <select name="type" id="type">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+              </select>
+            </div>
+            <div class="description-label">
+              <label for="description">Description</label>
+              <input
+                type="text"
+                id="description"
+                placeholder="e.g.Amazon,Salary,Coffee"
+                required
+              />
+            </div>
+            <div class="amount-date">
+              <div id="amount-label">
+                <label for="amount">Amount</label>
+                <input
+                  type="number"
+                  id="amount"
+                  default="0"
+                  step="0.01"
+                  required
+                />
+              </div>
+              <div id="date-label">
+                <label for="date">Date</label>
+                <input type="date" id="date" required />
+              </div>
+            </div>
+          </div>
+          <div class="category-label">
+            <label for="category">Category</label>
+            <select
+              name="category"
+              id="category"
+              placeholder="Select Category"
+              required
+            >
+              <option value="salary">Salary</option>
+              <option value="freelance">Freelance</option>
+              <option value="food">Food</option>
+              <option value="entertainment">Entertainment</option>
+              <option value="transportation">Transportation</option>
+              <option value="shopping">Shopping</option>
+              <option value="healthcare">Healthcare</option>
+              <option value="education">Education</option>
+              <option value="utilities">Utilities</option>
+              <option value="travel">Travel</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <button id="save-changes">Save Changes</button>
+        </div>
+      </form>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const settings = document.querySelector(".settings");
+      const dashboard = document.querySelector(".dashboard");
+      const transactionform = document.querySelector(".add-transaction");
+      const transactionbtn = document.querySelector("#Add-transaction");
+      const formclosebtn = document.querySelector("#close-btn1");
+      const settingText = document.querySelector(".settings a");
+      const dashboardText = document.querySelector(".dashboard a");
+      const rightSection = document.querySelector(".right");
+      const originalDashboard = rightSection.innerHTML;
+      const logOutBtn = document.querySelector("#logout");
+      const currentUser = localStorage.getItem("currentUser");
+      const transactionKey = `transactions_${currentUser}`;
+      const displayNameKey = `displayName_${currentUser}`;
+
+      const left = document.querySelector(".left");
+      const rightTop = document.querySelector(".right-top");
+      const rightBottom = document.querySelector(".right-bottom");
+      const rightHeading = document.querySelector(".financial-heading h1");
+      const leftHeading = document.querySelector(".logo-text h2");
+      const logo = document.querySelector(".layer");
+      const Card = document.querySelector(".card");
+      const preference = document.querySelector(".preference");
+
+      let balance = document.querySelector("#balance");
+      let income = document.querySelector("#income");
+      let expense = document.querySelector("#expense");
+      let totalTransactions = document.querySelector("#transactions");
+
+      let transactionBody = document.querySelector("#transactionBody");
+      const type = document.querySelector("#type");
+      const description = document.querySelector("#description");
+      const amount = document.querySelector("#amount");
+      const date = document.querySelector("#date");
+      const category = document.querySelector("#category");
+
+      const saveBtn = document.querySelector("#save-changes");
+      let searchBox = document.querySelector("#searchbox");
+      let filterBox = document.querySelector("#sbox");
+      let resetBtn = document.querySelector("#reset-all-data");
+
+      settings.addEventListener("click", () => {
+        settings.style.backgroundColor = "#DBEAFE";
+        dashboard.style.backgroundColor = "transparent";
+        settings.classList.add("active");
+        dashboard.classList.remove("active");
+        dashboardText.style.color = "black";
+        rightSection.innerHTML = `<div class="right-top">
+      <div class="username-logout">
+       <div class="border-user">
+        <div class="border-1">
+          <p>|</p>
+        </div>
+        <div class="user-name">
+          <h3 id="user-name2"></h3>
+        </div>
+       </div>
+       <div class="log-out">
+          <button id="logout"><i class="fa-solid fa-right-from-bracket"></i>
+            <b>Log Out</b></button>
+       </div>
+      </div>
+    </div>
+    <div class="right-bottom" >
+      <div class="setting-profile">
+        <div class="setting-heading">
+          <h1>Settings</h1>
+          <p>Manage your account profile and app formatting.</p>
+        </div>
+        <div id="profile-details-edit">
+          <form class="profile-details">
+            <div class="profile-edit1">
+            <div class="profile-heading">
+              <h1>Profile Details</h1>
+            </div>
+            <div class="profile-edit">
+              <div class="full-name">
+              <label for="username">Full Name</label>
+              <input type="text" id="username" placeholder="Enter your full name">
+              </div>
+              <div class="currency">
+              <label for="Primary Currency">Primary Currency</label>
+              <select id="currency">
+                <option value="USD">INR(₹)</option>
+                <option value="USD">USD($)</option>
+                <option value="EUR">EUR(€)</option>
+                <option value="GBP">GBP(£)</option>
+                <option value="JPY">JPY(¥)</option>
+                <option value="CAD">CAD(C$)</option>
+                <option value="AUD">AUD(A$)</option>
+              </select>
+            </div>
+            </div>
+            </div>
+            <div class="save-changes1">
+            <button type="submit" id="save-changes1">Save Changes</button>
+            </div>
+            
+
+          </form>
+          
+        </div>
+      </div>
+    </div>`;
+        setupDarkMode();
+        createChart();
+        const userName2 = document.querySelector("#user-name2");
+        const usernameInput = document.querySelector("#username");
+        const settingsaveChanges = document.querySelector("#save-changes1");
+
+        // Load saved name
+        usernameInput.value =
+          localStorage.getItem(displayNameKey) || currentUser;
+
+        userName2.textContent =
+          localStorage.getItem(displayNameKey) || currentUser;
+        settingsaveChanges.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const newName = usernameInput.value.trim();
+
+          if (newName === "") {
+            alert("Please enter your name.");
+            return;
+          }
+
+          localStorage.setItem(displayNameKey, newName);
+
+          userName2.textContent = newName;
+
+          // Add this line
+          const dashboardName = document.querySelector("#user-name1");
+          if (dashboardName) {
+            dashboardName.textContent = newName;
+          }
+
+          alert("Profile Updated Successfully!");
+        });
+      });
+      dashboard.addEventListener("click", () => {
+        dashboard.style.backgroundColor = "#DBEAFE";
+        settings.style.backgroundColor = "transparent";
+
+        dashboard.classList.add("active");
+        settings.classList.remove("active");
+
+        rightSection.innerHTML = originalDashboard;
+
+        // Reconnect dashboard elements
+        initializeDashboardElements();
+
+        function loadUserName() {
+          const savedName = localStorage.getItem(displayNameKey) || currentUser;
+          document.querySelector("#user-name1").textContent = savedName;
+        }
+
+        loadUserName();
+
+        // Refresh all dashboard data
+        updateCards();
+        renderTransactions();
+        createChart();
+
+        // Restore dark mode
+        setupDarkMode();
+
+        // Reconnect events
+        attachDashboardEvents();
+      });
+
+      function setupDarkMode() {
+        const darkModeBtn = document.querySelector("#darkmodebtn");
+
+        if (!darkModeBtn) return;
+
+        // Restore previous state
+        const darkMode = localStorage.getItem("darkMode") === "true";
+
+        darkModeBtn.checked = darkMode;
+        document.body.classList.toggle("dark", darkMode);
+
+        darkModeBtn.addEventListener("change", () => {
+          document.body.classList.toggle("dark", darkModeBtn.checked);
+          localStorage.setItem("darkMode", darkModeBtn.checked);
+        });
+      }
+
+      function initializeDashboardElements() {
+        balance = document.querySelector("#balance");
+        income = document.querySelector("#income");
+        expense = document.querySelector("#expense");
+        totalTransactions = document.querySelector("#transactions");
+
+        transactionBody = document.querySelector("#transactionBody");
+
+        searchBox = document.querySelector("#searchbox");
+        filterBox = document.querySelector("#sbox");
+        resetBtn = document.querySelector("#reset-all-data");
+      }
+      function attachDashboardEvents() {
+        searchBox.addEventListener("input", function () {
+          const keyword = searchBox.value.toLowerCase();
+
+          const filtered = transactions.filter((transaction) =>
+            transaction.description.toLowerCase().includes(keyword),
+          );
+
+          renderTransactions(filtered);
+        });
+
+        filterBox.addEventListener("change", function () {
+          const value = filterBox.value;
+
+          if (value === "All Types") {
+            renderTransactions(transactions);
+          } else if (value === "Income Only") {
+            renderTransactions(transactions.filter((t) => t.type === "income"));
+          } else {
+            renderTransactions(
+              transactions.filter((t) => t.type === "expense"),
+            );
+          }
+        });
+
+        resetBtn.addEventListener("click", function () {
+          const confirmReset = confirm(
+            "Are you sure you want to delete all transactions?",
+          );
+
+          if (!confirmReset) return;
+
+          transactions = [];
+
+          localStorage.removeItem(transactionKey);
+
+          renderTransactions();
+          updateCards();
+          createChart();
+        });
+      }
+
+      function updateCards() {
+        let totalIncome = 0;
+        let totalExpense = 0;
+
+        transactions.forEach((transaction) => {
+          if (transaction.type === "income") {
+            totalIncome += Number(transaction.amount);
+          } else {
+            totalExpense += Number(transaction.amount);
+          }
+        });
+
+        const currentBalance = totalIncome - totalExpense;
+
+        balance.textContent = "₹" + currentBalance.toFixed(2);
+        income.textContent = "₹" + totalIncome.toFixed(2);
+        expense.textContent = "₹" + totalExpense.toFixed(2);
+        totalTransactions.textContent = transactions.length;
+      }
+      function renderTransactions(list = transactions) {
+        transactionBody.innerHTML = "";
+
+        list.forEach((transaction) => {
+          const row = document.createElement("tr");
+
+          row.innerHTML = `
+            <td>${transaction.date}</td>
+
+            <td>${transaction.description}</td>
+
+            <td>${transaction.category}</td>
+
+            <td style="color:${
+              transaction.type === "income" ? "green" : "red"
+            }">
+
+                ${transaction.type === "income" ? "+" : "-"}₹${transaction.amount}
+
+            </td>
+
+            <td>
+
+                <button onclick="editTransaction(${transaction.id})">
+                    <i class="fa-solid fa-pen"></i>
+                </button>
+
+                <button onclick="deleteTransaction(${transaction.id})">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+
+            </td>
+        `;
+
+          transactionBody.appendChild(row);
+        });
+      }
+      searchBox.addEventListener("input", renderTransactions);
+
+      function editTransaction(id) {
+        const transaction = transactions.find((t) => t.id === id);
+
+        type.value = transaction.type;
+        description.value = transaction.description;
+        amount.value = transaction.amount;
+        date.value = transaction.date;
+        category.value = transaction.category;
+
+        editId = id;
+
+        transactionform.style.display = "flex";
+      }
+
+      function deleteTransaction(id) {
+        transactions = transactions.filter(
+          (transaction) => transaction.id !== id,
+        );
+
+        localStorage.setItem(transactionKey, JSON.stringify(transactions));
+
+        updateCards();
+        renderTransactions();
+        createChart();
+      }
+
+      transactionbtn.addEventListener("click", () => {
+        transactionform.style.display = "flex";
+      });
+      formclosebtn.addEventListener("click", () => {
+        transactionform.style.display = "none";
+      });
+      let editId = null;
+      saveBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        if (
+          description.value.trim() === "" ||
+          amount.value === "" ||
+          date.value === ""
+        ) {
+          alert("Please fill all fields.");
+          return;
+        }
+
+        const transaction = {
+          id: Date.now(),
+          type: type.value,
+          description: description.value,
+          amount: Number(amount.value),
+          category: category.value,
+          date: date.value,
+        };
+
+        if (editId === null) {
+          transactions.push(transaction);
+        } else {
+          transaction.id = editId;
+
+          const index = transactions.findIndex((t) => t.id === editId);
+
+          transactions[index] = transaction;
+
+          editId = null;
+        }
+
+        localStorage.setItem(transactionKey, JSON.stringify(transactions));
+
+        updateCards();
+        renderTransactions();
+        createChart();
+
+        transactionform.style.display = "none";
+
+        document.querySelector("#transactionForm").reset();
+
+        console.log(transactions);
+      });
+
+      document.addEventListener("click", (event) => {
+        if (event.target.closest("#logout")) {
+          localStorage.removeItem("currentUser");
+          window.location.replace("index.html");
+        }
+      });
+      const savedName = localStorage.getItem(displayNameKey) || currentUser;
+
+      document.querySelector("#user-name1").textContent = savedName;
+      let transactions = JSON.parse(localStorage.getItem(transactionKey)) || [];
+
+      let cashFlowChart = null;
+
+      function createChart() {
+        const ctx = document.getElementById("cashFlowChart");
+
+        if (!ctx) return;
+
+        let totalIncome = 0;
+        let totalExpense = 0;
+
+        transactions.forEach((transaction) => {
+          if (transaction.type === "income") {
+            totalIncome += Number(transaction.amount);
+          } else {
+            totalExpense += Number(transaction.amount);
+          }
+        });
+
+        if (cashFlowChart) {
+          cashFlowChart.destroy();
+        }
+
+        cashFlowChart = new Chart(ctx, {
+          type: "bar",
+
+          data: {
+            labels: ["Income vs Expense"],
+
+            datasets: [
+              {
+                label: "Income",
+                data: [totalIncome],
+                backgroundColor: "#15803d",
+              },
+              {
+                label: "Expense",
+                data: [totalExpense],
+                backgroundColor: "#b91c1c",
+              },
+            ],
+          },
+
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+          },
+        });
+      }
+      initializeDashboardElements();
+      attachDashboardEvents();
+
+      updateCards();
+      renderTransactions();
+      createChart();
+      setupDarkMode();
+    </script>
+  </body>
+</html>
